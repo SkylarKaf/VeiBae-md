@@ -55,7 +55,8 @@ moment.tz.setDefault("Asia/Jakarta").locale("id");
 module.exports = async(conn, msg, m, setting, store, welcome) => {
 	try {
 		let { ownerNumber, botName, gamewaktu, limitCount } = setting
-		let { allmenu } = require('./help')
+		let { allmenu } = require('../message/help')
+		let { footerq } = require('../message/help')
 		const { type, quotedMsg, mentioned, now, fromMe } = msg
 		if (msg.isBaileys) return
 		const jam = moment.tz('asia/jakarta').format('HH:mm:ss')
@@ -162,8 +163,11 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
            var url = await yts(query)
            url = url.videos[0].url
            hxz.youtube(url).then(async(data) => {
-             var button = [{ buttonId: `!ytmp3 ${url}`, buttonText: { displayText: `🎵 Audio (${data.size_mp3})` }, type: 1 }, { buttonId: `!ytmp4 ${url}`, buttonText: { displayText: `🎥 Video (${data.size})` }, type: 1 }]
-             conn.sendMessage(from, { caption: `*Title :* ${data.title}\n*Quality :* ${data.quality}\n*Url :* https://youtu.be/${data.id}`, location: { jpegThumbnail: await getBuffer(data.thumb) }, buttons: button, footer: 'Pilih Salah Satu Button Dibawah⬇️', mentions: [sender] })
+             var button = [
+             { buttonId: `!ytmp3 ${url}`, buttonText: { displayText: `🎵 Audio` }, type: 1 },
+             { buttonId: `!ytmp4 ${url}`, buttonText: { displayText: `🎥 Video` }, type: 1 }
+             ]
+             conn.sendMessage(from, { caption: `*Title:*\n ${data.title}\n*Quality:* ${data.quality}\n*Url:* https://youtu.be/${data.id}`, image: await getBuffer(data.thumb), buttons: button, footer: 'Pilih Salah Satu Button Dibawah️', mentions: [sender] })
            }).catch((e) => {
              conn.sendMessage(from, { text: mess.error.api }, { quoted: msg })
                ownerNumber.map( i => conn.sendMessage(from, { text: `Send Play Error : ${e}` }))
@@ -211,6 +215,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		const buttonWithText = (from, text, footer, buttons) => {
 			return conn.sendMessage(from, { text: text, footer: footer, templateButtons: buttons })
 		}
+		
 		const sendContact = (jid, numbers, name, quoted, mn) => {
 			let number = numbers.replace(/[^0-9]/g, '')
 			const vcard = 'BEGIN:VCARD\n' 
@@ -222,13 +227,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			return conn.sendMessage(from, { contacts: { displayName: name, contacts: [{ vcard }] }, mentions : mn ? mn : []},{ quoted: quoted })
 		}
 		
-		const buttonsDefault = [
-			{ callButton: { displayText: `Call Owner!`, phoneNumber: `+6285791458996` } },
-			{ urlButton: { displayText: `Script!`, url : `https://github.com/rtwone/chitandabot` } },
-			{ quickReplyButton: { displayText: `🧑 Owner`, id: `${prefix}owner` } },
-			{ quickReplyButton: { displayText: `💰 Donasi`, id: `${prefix}donate` } }
-		]
-        
+		const buttonsDefault = [{ urlButton: { displayText: `Website`, url : `https://skylarkaf.github.io` } }]      
 		const isImage = (type == 'imageMessage')
 		const isVideo = (type == 'videoMessage')
 		const isSticker = (type == 'stickerMessage')
@@ -309,11 +308,13 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 		}
 
 		switch(command) {
+		
 			// Main Menu
 			case prefix+'menu':
 			case prefix+'help':
-			    var teks = allmenu(sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount)
-			    conn.sendMessage(from, { caption: teks, location: { jpegThumbnail: fs.readFileSync(setting.pathimg) }, templateButtons: buttonsDefault, footer: 'NullTeam-ID © 2021', mentions: [sender] })
+			    var teks = allmenu(sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount)		
+			    var tegs = footerq(sender)   			   
+			    conn.sendMessage(from, { caption: teks, video: await getBuffer(setting.gifmp4), gifPlayback: true, templateButtons: buttonsDefault, footer: tegs, mentions: [sender] })
 				break
 			case prefix+'runtime':
 			    reply(runtime(process.uptime()))
@@ -437,6 +438,7 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 				  })
 			    }
 			    break
+			    
 	        // Downloader Menu
 			case prefix+'tiktok':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
@@ -552,19 +554,21 @@ module.exports = async(conn, msg, m, setting, store, welcome) => {
 			    if (!isUrl(args[1])) return reply(mess.error.Iv)
 			    if (!args[1].includes('instagram.com')) return reply(mess.error.Iv)
 			    reply(mess.wait)
-			    xfar.Instagram(args[1]).then( data => {
-			     var teks = `*Instagram Downloader*\n\n*≻ Title :* ${data.title}\n*≻ Jumlah Media :* ${data.medias.length}\n*≻ Url Source :* ${data.url}\n\n_wait a minute sending media..._`
-			     reply(teks)
-			     for (let i of data.medias) {
-				  if (i.extension === "mp4") {
-				   conn.sendMessage(from, { video: { url: i.url }})
-				  } else if (i.extension === "jpg") {
-				   conn.sendMessage(from, { image: { url: i.url }})
-			      }
-			     }
-				 limitAdd(sender, limit)
-			    }).catch(() => reply(mess.error.api))
-			    break
+			    let urlnya = q
+	            hxz.igdl(urlnya)
+	            .then(async(result) => {
+		        for(let i of result.medias){
+			    if(i.url.includes('mp4')){
+				let link = await getBuffer(i.url)
+                conn.sendMessage(m.chat, { video: link, }, { quoted: m })
+                } else {
+                    let link = await getBuffer(i.url)
+                  conn.sendMessage(m.chat, { image: link, }, { quoted: m })                  
+                }
+            }
+            }).catch((err) => reply(`Server eror`))
+            		
+			break
 			case prefix+'facebook': case prefix+'fbdl':
 			    if (isLimit(sender, isPremium, isOwner, limitCount, limit)) return reply (`Limit kamu sudah habis silahkan kirim ${prefix}limit untuk mengecek limit`)
 			    if (args.length < 2) return reply(`Kirim perintah ${command} link`)

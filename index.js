@@ -3,6 +3,9 @@
   * Contact me on WhatsApp wa.me/6285791458996
   * Follow https://github.com/rtwone
   * If you want to buy an updated script that is not encrypted, please WhatsApp me
+  # Note 
+  * Recode to simplebot by SkylarKaf
+  * Follow instagram @skylarkaf_
 */
 
 "use strict";
@@ -89,10 +92,10 @@ const connectToWhatsApp = async () => {
 	/* Auto Update */
 	require('./message/help')
 	require('./lib/myfunc')
-	require('./message/msg')
+	require('./pesan/msg')
 	nocache('./message/help', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
 	nocache('./lib/myfunc', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
-	nocache('./message/msg', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
+	nocache('./pesan/msg', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
 	
 	conn.multi = true
 	conn.nopref = false
@@ -102,7 +105,7 @@ const connectToWhatsApp = async () => {
 		var msg = m.messages[0]
 		msg = serialize(conn, msg)
 		msg.isBaileys = msg.key.id.startsWith('BAE5') || msg.key.id.startsWith('3EB0')
-		require('./message/msg')(conn, msg, m, setting, store, welcome)
+		require('./pesan/msg')(conn, msg, m, setting, store, welcome)
 	})
 	conn.ev.on('connection.update', (update) => {
 		const { connection, lastDisconnect } = update

@@ -1,13 +1,14 @@
 {
   "ownerNumber": ["6285791458996@s.whatsapp.net"],
   "ownerName": ["r"],
-  "botName": "Chitanda Eru Bot",
+  "botName": "simplebot",
   "sessionName": "rtwone-md",
   "pathimg": "./media/Chitanda.jpg",
+  "gifmp4": "https://uploader.caliph.my.id/file/BrHI7RTQI2.mp4",
   "gamewaktu": 90,
-  "limitCount": 25,
+  "limitCount": 2500,
   "gcount": {
-	"prem": 35,
-	"user": 15
+	"prem": 30005,
+	"user": 150000
   }
 }

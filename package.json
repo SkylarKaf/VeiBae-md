@@ -1,5 +1,5 @@
 {
-  "name": "chitanda-md",
+  "name": "simple-bot",
   "version": "1.0.0",
   "description": "Simple whatsapp bot with multi device.",
   "main": "index.js",
@@ -13,13 +13,14 @@
   "author": "irfanhariyanto",
   "license": "MIT",
   "dependencies": {
-    "@adiwajshing/baileys": "github:adiwajshing/baileys",
+   "@adiwajshing/baileys": "^4.1.0",
     "@adiwajshing/keyed-db": "^0.2.4",
     "awesome-phonenumber": "^2.64.0",
     "qrcode-terminal": "^0.12.0",
     "axios": "^0.24.0",
     "chalk": "^4.1.2",
     "clui": "^0.3.6",
+    "jimp": "^0.16.1",
     "fetch": "^1.1.0",
     "figlet": "^1.5.2",
     "file-type": "^16.5.3",

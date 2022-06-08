@@ -1,8 +1,7 @@
 /**
   * Edit features in './message/msg.js'
-  * Contact me on WhatsApp wa.me/6285791458996
-  * Follow https://github.com/rtwone
-  * If you want to buy an updated script that is not encrypted, please WhatsApp me
+  * Contact Dev on WhatsApp wa.me/6285791458996
+  * If you want to buy an updated script that is not encrypted, please WhatsApp Dev
   # Note 
   * Recode to simplebot by SkylarKaf
   * Follow instagram @skylarkaf_
@@ -36,14 +35,14 @@ let welcome = JSON.parse(fs.readFileSync('./database/welcome.json'));
 
 function title() {
       console.clear()
-	  console.log(chalk.bold.green(figlet.textSync('WaBot MD', {
+	  console.log(chalk.bold.green(figlet.textSync('WhatsApp Bot', {
 		font: 'Standard',
 		horizontalLayout: 'default',
 		verticalLayout: 'default',
 		width: 80,
 		whitespaceBreak: false
 	})))
-	console.log(chalk.yellow(`\n                        ${chalk.yellow('[ Created By Irfan ]')}\n\n${chalk.red('Chitanda Eru Bot')} : ${chalk.white('WhatsApp Bot Multi Device')}\n${chalk.red('Follow Insta Dev')} : ${chalk.white('@irfann._x')}\n${chalk.red('Message Me On WhatsApp')} : ${chalk.white('+62 857-9145-8996')}\n${chalk.red('Donate')} : ${chalk.white('085791458996 ( Ovo/Pulsa/Dana )')}\n`))
+	console.log(chalk.yellow(`\n                   ${chalk.yellow('[ Created By Irfan Recode Skylarlaf ]')}\n\n${chalk.red('Simplebot.js')} : ${chalk.white('WhatsApp Bot Multi Device')}\n${chalk.red('Follow Insta Dev')} : ${chalk.white('@irfann._x')}\n${chalk.red('Follow My insta')} : ${chalk.white('skylarkaf_')}\n${chalk.red('Donate Me')} : ${chalk.white('082331660134 (gopay/dana/pulsa)')}\n`))
 }
 
 /**
@@ -92,10 +91,10 @@ const connectToWhatsApp = async () => {
 	/* Auto Update */
 	require('./message/help')
 	require('./lib/myfunc')
-	require('./pesan/msg')
+	require('./message/msg')
 	nocache('./message/help', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
 	nocache('./lib/myfunc', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
-	nocache('./pesan/msg', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
+	nocache('./message/msg', module => console.log(chalk.greenBright('[ WHATSAPP BOT ]  ') + time + chalk.cyanBright(` "${module}" Telah diupdate!`)))
 	
 	conn.multi = true
 	conn.nopref = false
@@ -105,7 +104,7 @@ const connectToWhatsApp = async () => {
 		var msg = m.messages[0]
 		msg = serialize(conn, msg)
 		msg.isBaileys = msg.key.id.startsWith('BAE5') || msg.key.id.startsWith('3EB0')
-		require('./pesan/msg')(conn, msg, m, setting, store, welcome)
+		require('./message/msg')(conn, msg, m, setting, store, welcome)
 	})
 	conn.ev.on('connection.update', (update) => {
 		const { connection, lastDisconnect } = update
@@ -134,7 +133,7 @@ const connectToWhatsApp = async () => {
                 if (data.action == "add") {
                   conn.sendMessage(data.id, { image: { url: pp_user }, caption: `Welcome @${i.split("@")[0]}`, mentions: [i] })
                 } else if (data.action == "remove") {
-                  conn.sendMessage(data.id, { image: { url: pp_user }, caption: `Sayonara @${i.split("@")[0]}`, mentions: [i] })
+                  conn.sendMessage(data.id, { image: { url: pp_user }, caption: `Byee @${i.split("@")[0]}`, mentions: [i] })
                 }
               }
             } catch (e) {

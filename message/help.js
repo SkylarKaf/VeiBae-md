@@ -21,8 +21,6 @@ function toCommas(x) {
 
 exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit, limitCount, glimit, gcount) => {
 	return `_${ucapanWaktu} ${pushname !== undefined ? pushname : 'Kak'} 👋_
-	
-🎯 Can I help you ?
 
 *📃 Main Menu*
 ├${prefix}menu
@@ -94,8 +92,7 @@ exports.allmenu = (sender, prefix, pushname, isOwner, isPremium, balance, limit,
 }
 
 exports.footerq = (sender) => {
-return `• Contact Me
-
+return `• Contact Owner
 📑 email: skylarkaf7@gmail.com
 📬 github: https://github.com/SkylarKaf`
 }

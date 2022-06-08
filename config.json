@@ -1,9 +1,9 @@
 {
-  "ownerNumber": ["6285791458996@s.whatsapp.net"],
-  "ownerName": ["r"],
-  "botName": "simplebot",
+  "ownerNumber": ["6282331660134@s.whatsapp.net"],
+  "ownerName": ["SkylarKaf"],
+  "botName": "simplebot.js",
   "sessionName": "rtwone-md",
-  "pathimg": "./media/Chitanda.jpg",
+  "pathimg": "./database/media/Chitanda.jpg",
   "gifmp4": "https://uploader.caliph.my.id/file/BrHI7RTQI2.mp4",
   "gamewaktu": 90,
   "limitCount": 2500,

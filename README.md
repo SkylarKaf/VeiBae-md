@@ -1,7 +1,5 @@
 #### WhatsApp Bot with Library Baileys MD
 
-Up minggu depan :v Mau bikin System aturan buat nsfw
-
 ## Cr & Tq to
 <a href="https://github.com/adiwajshing"><img src="https://github.com/adiwajshing.png?size=100" width="100" height="100"></a> | [![Yanz](https://github.com/rtwone.png?size=100)](https://github.com/rtwone) | [![FEBB](https://github.com/febbadityaN.png?size=100)](https://github.com/febbadityaN) | [![Skylar](https://github.com/SkylarKaf.png?size=100)](https://github.com/SkylarKaf) | [![FAJAR](http://github.com/xfar05.png?size=100)](http://github.com/xfar05) | [![HXZ](http://github.com/Hexagonz.png?size=100)](http://github.com/Hexagonz) | [![KOTZ](http://github.com/Kotzyy.png?size=100)](http://github.com/Kotzyy) | [![RA](http://github.com/rayyreall.png?size=100)](http://github.com/rayyreall)
 ----|----|----|----|----|----|----|----
